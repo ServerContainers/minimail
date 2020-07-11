@@ -17,8 +17,8 @@ RUN apk add --no-cache \
  && addgroup --gid 5000 dockervmail \
  && adduser --ingroup dockervmail --uid 5000 --home /var/vmail --shell /bin/false --disabled-password --gecos "" dockervmail
 
-# postfix (smtp, smtps, submission)
-EXPOSE 25 465 587
+# postfix (smtp, submission)
+EXPOSE 25 587
 
 # dovecot (imap, imaps)
 EXPOSE 143 993

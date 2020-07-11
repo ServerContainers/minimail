@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cat /container/config/postfix/main-*.conf > /etc/postfix/main.cf
+cat /container/config/postfix/master.conf > /etc/postfix/master.cf
 cat /container/config/dovecot/dovecot.conf > /etc/dovecot/dovecot.conf
 /container/scripts/add-mail-accounts.sh
 
@@ -32,26 +33,6 @@ fi
 ##
 # POSTFIX GENERAL
 ##
-
-  if grep '^#submission' /etc/postfix/master.cf >/dev/null 2>/dev/null; then
-    echo ">> enable postfix mail submission 587"
-    sed -i 's/#submission/submission/g' /etc/postfix/master.cf
-    sed -i '/^submission.*/a \  -o smtpd_sasl_auth_enable=yes' /etc/postfix/master.cf
-    sed -i '/^submission.*/a \  -o smtpd_tls_security_level=encrypt' /etc/postfix/master.cf
-  fi
-
-  if grep '^#smtps' /etc/postfix/master.cf >/dev/null 2>/dev/null; then
-    echo ">> enable postfix mail smtps 465"
-    sed -i 's/#smtps/smtps/g' /etc/postfix/master.cf
-    sed -i '/^smtps.*/a \  -o smtpd_sasl_auth_enable=no' /etc/postfix/master.cf
-    sed -i '/^smtps.*/a \  -o smtpd_tls_security_level=encrypt' /etc/postfix/master.cf
-  fi
-
-  if ! sed -n '13p' /etc/postfix/master.cf | grep smtpd_sasl_auth_enable=no >/dev/null 2>/dev/null; then
-    echo ">> disbale sasl on postfix smtp 25"
-    sed -i '12a \  -o smtpd_sasl_auth_enable=no' /etc/postfix/master.cf
-  fi
-
 
   if [ -z ${RELAYHOST+x} ]; then
     echo ">> it is advised to use this container with a relayhost (maybe use servercontainers/mail-gateway)..."
