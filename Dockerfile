@@ -3,7 +3,6 @@ FROM alpine
 
 RUN apk add --no-cache \
     runit \
-    busybox-extras \
   \
     postfix \
     dovecot \
