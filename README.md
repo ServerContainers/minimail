@@ -11,7 +11,7 @@ What makes it better?
 - Configure Users and Emails using Environment Variables
 - Internaly only plain textfiles are used (passdb, postmap virtual stuff etc.)
 - Just 3 Daemons - runit and postfix + dovecot
-- Blowfish Crypt Password Hashing (bcrypt) available (`doveadm pw -s BLF-CRYPT`)
+- Blowfish Crypt Password Hashing (bcrypt) available (`doveadm pw -s BLF-CRYPT` or `docker run --rm -ti alpine 'apk add dovecot; doveadm pw -s BLF-CRYPT'`)
 
 It's based on the [_/alpine](https://registry.hub.docker.com/_/alpine/) Image (3.12)
 
