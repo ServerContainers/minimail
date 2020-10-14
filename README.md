@@ -1,4 +1,4 @@
-# Minimalistic Docker Mail Box (smtp + imap) Postfix/Dovecot (servercontainers/minimail)
+# Minimalistic Docker Mail Box (smtp + imap) Postfix/Dovecot (servercontainers/minimail) [x86 + arm]
 _maintained by ServerContainers_
 
 ## What is it
