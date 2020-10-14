@@ -1,21 +1,16 @@
 image: servercontainers/minimail:latest
 manifests:
-  - image: servercontainers/minimail:amd64
+  - image: servercontainers/minimail:latest-amd64
     platform:
       architecture: amd64
       os: linux
-  - image: servercontainers/minimail:arm32v5
-    platform:
-      architecture: arm
-      os: linux
-      variant: v5
-  - image: servercontainers/minimail:arm32v7
-    platform:
-      architecture: arm
-      os: linux
-      variant: v7
-  - image: servercontainers/minimail:arm64v8
+  - image: servercontainers/minimail:latest-arm64v8
     platform:
       architecture: arm64
       os: linux
       variant: v8
+  - image: servercontainers/minimail:latest-arm32v7
+    platform:
+      architecture: arm
+      os: linux
+      variant: v7
