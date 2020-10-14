@@ -14,3 +14,8 @@ manifests:
       architecture: arm
       os: linux
       variant: v7
+  - image: servercontainers/minimail:latest-arm32v6
+    platform:
+      architecture: arm
+      os: linux
+      variant: v6
