@@ -9,7 +9,7 @@ What makes it better?
 
 - Alpine Linux Base (smaller footprint)
 - Configure Users and Emails using Environment Variables
-- Internaly only plain textfiles are used (passdb, postmap virtual stuff etc.)
+- Internaly only plain textfiles (`texthash`) are used (passdb, virtual stuff etc.)
 - Just 3 Daemons - runit and postfix + dovecot
 - Blowfish Crypt Password Hashing (bcrypt) available (`doveadm pw -s BLF-CRYPT` or `docker run --rm -ti alpine sh -c 'apk add dovecot; doveadm pw -s BLF-CRYPT'`)
 
@@ -110,5 +110,5 @@ __OFFICIAL MAIL ENVIRONMENT VARIABLES__
         - cert.key (incoming SSL Server key)
 - /etc/postfix/additional
     - this is where the container looks for:
-        - transport (postfix transport text-file - without been postmaped)
+        - transport (postfix transport text-file (`texthash`) - without been postmaped)
         - header_checks (postfix header_checks regex file)

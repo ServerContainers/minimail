@@ -24,7 +24,6 @@ do
   echo ">> add user $NAME ($EMAIL)"
   echo "$EMAIL:$PASSWORD_HASH" >> /etc/dovecot/users
   echo "$EMAIL whatever" >> /etc/postfix/vmailbox
-  postmap /etc/postfix/vmailbox
 
   echo ">> adding aliases for user $NAME ($EMAIL):"
   for ALIAS in $ALIASES;
@@ -32,7 +31,6 @@ do
     echo "  >> adding alias $ALIAS"
     echo "$ALIAS" >> /aea
     echo "$ALIAS $EMAIL" >> /etc/postfix/virtual
-    postmap /etc/postfix/virtual
   done
 done
 
