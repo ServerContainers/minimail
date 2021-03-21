@@ -19,6 +19,12 @@ View in Docker Registry [servercontainers/minimail](https://registry.hub.docker.
 
 View in GitHub [ServerContainers/minimail](https://github.com/ServerContainers/minimail)
 
+
+## Changelogs
+
+* 2021-03-21
+    * update and missing `hash:` support fix -> now `texthash` without `postmap`
+
 ## Environment variables
 
 __OFFICIAL DATABASE MANAGMENT ENVIRONMENT VARIABLES__

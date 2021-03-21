@@ -81,7 +81,7 @@ fi
   if [ -f /etc/postfix/additional/transport ]; then
     echo ">> POSTFIX found 'additional/transport' activating it as transport_maps"
     postmap /etc/postfix/additional/transport
-    postconf -e "transport_maps = hash:/etc/postfix/additional/transport"
+    postconf -e "transport_maps = texthash:/etc/postfix/additional/transport"
   fi
 
   if [ -f /etc/postfix/additional/header_checks ]; then
