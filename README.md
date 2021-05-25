@@ -23,7 +23,7 @@ View in GitHub [ServerContainers/minimail](https://github.com/ServerContainers/m
 ## Changelogs
 
 * 2021-05-25
-    * replaced missing `btree:` with `sdbm:`
+    * removed tls session cache
 * 2021-03-21
     * update and missing `hash:` support fix -> now `texthash` without `postmap`
 
