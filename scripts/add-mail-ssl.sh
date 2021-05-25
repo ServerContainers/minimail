@@ -34,7 +34,7 @@ smtp_tls_mandatory_exclude_ciphers = aNULL, DES, RC4, MD5, 3DES
 smtp_tls_protocols = !SSLv3
 smtp_tls_mandatory_protocols = !SSLv3
 smtp_tls_mandatory_ciphers = high
-smtp_tls_session_cache_database = btree:\${data_directory}/smtp_scache
+smtp_tls_session_cache_database = sdbm:\${data_directory}/smtp_scache
 smtp_tls_loglevel = 1
 
 EOF
@@ -77,7 +77,7 @@ smtpd_tls_mandatory_exclude_ciphers = aNULL, DES, RC4, MD5, 3DES
 smtpd_tls_protocols = !SSLv3
 smtpd_tls_mandatory_protocols = !SSLv3
 smtpd_tls_mandatory_ciphers = high
-smtpd_tls_session_cache_database = btree:\${data_directory}/smtpd_scache
+smtpd_tls_session_cache_database = sdbm:\${data_directory}/smtpd_scache
 smtpd_tls_loglevel = 1
 
 EOF
