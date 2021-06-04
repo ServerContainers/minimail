@@ -95,6 +95,13 @@ fi
 /container/scripts/add-mail-ssl.sh
 
 ##
+# TLS Cert Renew Stuff
+##
+
+rm -rf /tmp/tls 2> /dev/null
+cp -a /etc/postfix/tls /tmp/tls
+
+##
 # CONTAINER GENERAL
 ##
 

@@ -22,6 +22,8 @@ View in GitHub [ServerContainers/minimail](https://github.com/ServerContainers/m
 
 ## Changelogs
 
+* 2021-06-04
+    * added healthcheck (will fail when certs are updated without container restart)
 * 2021-05-25
     * removed tls session cache
 * 2021-03-21
