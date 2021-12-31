@@ -113,5 +113,9 @@ chown -R root:root /etc/postfix/tls 2>/dev/null >/dev/null
 chmod 555 /etc/postfix/tls 2>/dev/null >/dev/null
 chmod -R 644 /etc/postfix/tls/* 2>/dev/null >/dev/null
 
-echo ">> starting services"
-exec runsvdir -P /container/config/runit
+##
+# CMD
+##
+echo ">> CMD: exec docker CMD"
+echo "$@"
+exec "$@"

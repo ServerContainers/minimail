@@ -19,8 +19,19 @@ View in Docker Registry [servercontainers/minimail](https://registry.hub.docker.
 
 View in GitHub [ServerContainers/minimail](https://github.com/ServerContainers/minimail)
 
+## Versioning
+
+You'll find all images tagged like `a3.15.0-p3.6.3-r1-d2.3.17.1-r0` which means `a<alpine version>-p<postfix version>-d<dovecot version>`.
+This way you can pin your installation/configuration to a certian version. or easily roll back if you experience any problems
+(don't forget to open a issue in that case ;D).
+
+The `latest` version will be updated/released after I managed to test a new pinned version in my production environment.
+This way I can easily find and fix bugs without affecting any users. It will result in a way more stable container.
+
 
 ## Changelogs
+* 2021-12-31
+    * new build process and version pinning
 * 2021-07-28
     * healthcheck will fail if certificate is 3 days or less valid or already expired
 * 2021-06-04
