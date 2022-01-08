@@ -12,7 +12,7 @@ if [ -z ${POSTFIX_VERSION+x} ] || [ -z ${POSTFIX_VERSION+x} ] || [ -z ${POSTFIX_
 fi
 
 echo "check if image was already build and pushed - skip check on release version"
-echo "$@" | grep "release" || docker pull "$IMG:a$ALPINE_VERSION-p$POSTFIX_VERSION-d$DOVECOT_VERSION" 2>/dev/null >/dev/null && echo "image already build" && exit 1
+echo "$@" | grep -v "release" && docker pull "$IMG:a$ALPINE_VERSION-p$POSTFIX_VERSION-d$DOVECOT_VERSION" 2>/dev/null >/dev/null && echo "image already build" && exit 1
 
 docker buildx build -q --pull --no-cache --platform "$PLATFORM" -t "$IMG:a$ALPINE_VERSION-p$POSTFIX_VERSION-d$DOVECOT_VERSION" --push .
 
