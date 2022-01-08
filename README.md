@@ -30,6 +30,9 @@ This way I can easily find and fix bugs without affecting any users. It will res
 
 
 ## Changelogs
+
+* 2022-01-08
+    * better build script
 * 2021-12-31
     * new build process and version pinning
 * 2021-07-28
