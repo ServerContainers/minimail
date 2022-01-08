@@ -4,7 +4,7 @@ IMG="servercontainers/minimail"
 
 PLATFORM="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6"
 
-if [ -z ${POSTFIX_VERSION+x} ] || [ -z ${POSTFIX_VERSION+x} ] || [ -z ${POSTFIX_VERSION+x} ]; then
+if [ -z ${POSTFIX_VERSION+x} ] || [ -z ${DOVECOT_VERSION+x} ] || [ -z ${ALPINE_VERSION+x} ]; then
   docker-compose build -q --pull --no-cache
   export POSTFIX_VERSION=$(docker run --rm -ti "$IMG" apk list 2>/dev/null | grep '\[installed\]' | grep "postfix-[0-9]" | cut -d " " -f1 | sed 's/postfix-//g' | tr -d '\r')
   export DOVECOT_VERSION=$(docker run --rm -ti "$IMG" apk list 2>/dev/null | grep '\[installed\]' | grep "dovecot-[0-9]" | cut -d " " -f1 | sed 's/dovecot-//g' | tr -d '\r')
