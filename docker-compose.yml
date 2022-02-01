@@ -21,7 +21,7 @@ services:
       # create a mail account for user johndoe - accountname: hon@doe.io
       ACONF_USER_ACCOUNT_NAME_johndoe: john@doe.io
       # password hash for: asdf
-      ACONF_USER_PASSWORD_HASH_johndoe: '{BLF-CRYPT}$$2y$$05$$Zl.hPiR36SPW4cG.O1aRAOry1qLgz5gwWig05EkNNGytfmbYSlsI6'
+      ACONF_USER_PASSWORD_HASH_johndoe: '{BLF-CRYPT}$$2y$$05$$cOsgZkGClXy1PxxO8tRpkOb2l8Hq4G1aJD8nkihtwjWFbh4lI9Yyq'
       # additional domains john will use
       ACONF_USER_ALIASES_johndoe: postmaster@otherdomain.com mail@johndoe.tld git@otherdomain.com postmaster@johndoe.tld webmaster@johndoe.tld mail@johndoe.com mail@john.com
     volumes:
