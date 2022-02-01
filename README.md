@@ -15,7 +15,7 @@ What makes it better?
 
 It's based on the [_/alpine](https://registry.hub.docker.com/_/alpine/) Image (3.12)
 
-View in Docker Registry [servercontainers/minimail](https://registry.hub.docker.com/u/servercontainers/minimail/)
+View in Docker Registry [servercontainers/minimail](https://registry.hub.docker.com/r/servercontainers/minimail/)
 
 View in GitHub [ServerContainers/minimail](https://github.com/ServerContainers/minimail)
 
