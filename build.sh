@@ -1,11 +1,9 @@
 #!/bin/sh -x
 
 [ -z "$DOCKER_REGISTRY" ] && echo "error please specify docker-registry DOCKER_REGISTRY" && exit 1
-IMG="$DOCKER_REGISTRY/samba"
+IMG="$DOCKER_REGISTRY/minimail"
 
 sed -i.bak 's/image: /image: '"$DOCKER_REGISTRY"'\//g' docker-compose.yml; rm docker-compose.yml.bak
-
-IMG="servercontainers/minimail"
 
 PLATFORM="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6"
 

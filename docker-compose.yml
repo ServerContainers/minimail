@@ -4,7 +4,7 @@ services:
 
   minimail:
     build: .
-    image: minimail
+    image: registry.nas.bknd.ovh/minimail
     restart: always
     environment:
       MAIL_FQDN: internal.doe-mailservers.tld
