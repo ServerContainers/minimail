@@ -1,9 +1,9 @@
-# Minimalistic Docker Mail Box (smtp + imap) Postfix/Dovecot (servercontainers/minimail) [x86 + arm]
+# Minimalistic Docker Mail Box (smtp + imap) Postfix/Dovecot build yourself container
 _maintained by ServerContainers_
 
 ## What is it
 
-This Dockerfile (available as ___servercontainers/minimail___) gives you a dovecot and postfix installation is meant to store mails, handle authentication and users and a new version (completely rewritten) of [ServerContainers/mail-box](https://github.com/ServerContainers/mail-box).
+This Dockerfile (available as self build container) gives you a dovecot and postfix installation is meant to store mails, handle authentication and users and a new version (completely rewritten) of [ServerContainers/mail-box](https://github.com/ServerContainers/mail-box).
 
 What makes it better?
 
@@ -15,22 +15,36 @@ What makes it better?
 
 It's based on the [_/alpine](https://registry.hub.docker.com/_/alpine/) Image (3.12)
 
-View in Docker Registry [servercontainers/minimail](https://registry.hub.docker.com/r/servercontainers/minimail/)
+_currently tested on: x86_64, arm64, arm_
 
-View in GitHub [ServerContainers/minimail](https://github.com/ServerContainers/minimail)
+## IMPORTANT!
 
-## Versioning
+In March 2023 - Docker informed me that they are going to remove my 
+organizations `servercontainers` and `desktopcontainers` unless 
+I'm upgrading to a pro plan.
+
+I'm not going to do that. It's more of a professionally done hobby then a
+professional job I'm earning money with.
+
+In order to avoid bad actors taking over my org. names and publishing potenial
+backdoored containers, I'd recommend to switch over clone my github repos and
+build the containers yourself.
+
+## Build & Variants
+
+You can specify `DOCKER_REGISTRY` environment variable (for example `my.registry.tld`)
+and use the build script to build the main container and it's variants for _x86_64, arm64 and arm_
 
 You'll find all images tagged like `a3.15.0-p3.6.3-r1-d2.3.17.1-r0` which means `a<alpine version>-p<postfix version>-d<dovecot version>`.
 This way you can pin your installation/configuration to a certian version. or easily roll back if you experience any problems
 (don't forget to open a issue in that case ;D).
 
-The `latest` version will be updated/released after I managed to test a new pinned version in my production environment.
-This way I can easily find and fix bugs without affecting any users. It will result in a way more stable container.
-
+To build a `latest` tag run `./build.sh release`
 
 ## Changelogs
 
+* 2023-03-17
+    * switched from docker hub to a build-yourself container
 * 2022-01-08
     * better build script
 * 2021-12-31

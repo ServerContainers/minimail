@@ -1,5 +1,10 @@
 #!/bin/sh -x
 
+[ -z "$DOCKER_REGISTRY" ] && echo "error please specify docker-registry DOCKER_REGISTRY" && exit 1
+IMG="$DOCKER_REGISTRY/samba"
+
+sed -i.bak 's/image: /image: '"$DOCKER_REGISTRY"'\//g' docker-compose.yml; rm docker-compose.yml.bak
+
 IMG="servercontainers/minimail"
 
 PLATFORM="linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6"
@@ -19,3 +24,5 @@ fi
 docker buildx build -q --pull --no-cache --platform "$PLATFORM" -t "$IMG:a$ALPINE_VERSION-p$POSTFIX_VERSION-d$DOVECOT_VERSION" --push .
 
 echo "$@" | grep "release" 2>/dev/null >/dev/null && echo ">> releasing new latest" && docker buildx build -q --pull --platform "$PLATFORM" -t "$IMG:latest" --push .
+
+git checkout docker-compose.yml

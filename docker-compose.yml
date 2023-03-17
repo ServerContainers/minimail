@@ -4,7 +4,7 @@ services:
 
   minimail:
     build: .
-    image: servercontainers/minimail
+    image: minimail
     restart: always
     environment:
       MAIL_FQDN: internal.doe-mailservers.tld
