@@ -1,4 +1,4 @@
-# Minimalistic Docker Mail Box (smtp + imap) Postfix/Dovecot build yourself container
+# Minimalistic Docker Mail Box (smtp + imap) Postfix/Dovecot (ghcr.io/servercontainers/minimail) [x86 + arm]
 _maintained by ServerContainers_
 
 ## What is it
@@ -14,6 +14,10 @@ What makes it better?
 - Blowfish Crypt Password Hashing (bcrypt) available (`doveadm pw -s BLF-CRYPT` or `docker run --rm -ti alpine sh -c 'apk add dovecot; doveadm pw -s BLF-CRYPT'`)
 
 It's based on the [_/alpine](https://registry.hub.docker.com/_/alpine/) Image (3.12)
+
+View in Docker Registry [ghcr.io/servercontainers/minimail](https://ghcr.io/servercontainers/minimail)
+
+View in GitHub [ServerContainers/minimail](https://github.com/ServerContainers/minimail)
 
 _currently tested on: x86_64, arm64, arm_
 
@@ -43,6 +47,9 @@ To build a `latest` tag run `./build.sh release`
 
 ## Changelogs
 
+* 2023-03-20
+    * github action to build container
+    * implemented ghcr.io as new registry
 * 2023-03-17
     * switched from docker hub to a build-yourself container
 * 2022-01-08
