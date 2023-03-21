@@ -31,8 +31,7 @@ I'm not going to do that. It's more of a professionally done hobby then a
 professional job I'm earning money with.
 
 In order to avoid bad actors taking over my org. names and publishing potenial
-backdoored containers, I'd recommend to switch over clone my github repos and
-build the containers yourself.
+backdoored containers, I'd recommend to switch over to my new github registry: `ghcr.io/servercontainers`.
 
 ## Build & Variants
 
