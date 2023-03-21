@@ -6,7 +6,7 @@ export DOVECOT_VERSION=$(docker run --rm -t get-version apk list 2>/dev/null | g
 export ALPINE_VERSION=$(docker run --rm -t get-version cat /etc/alpine-release | tail -n1 | tr -d '\r')
 [ -z "$ALPINE_VERSION" ] && exit 1
 
-export IMGTAG=$(echo "$1:a$ALPINE_VERSION-p$POSTFIX_VERSION-d$DOVECOT_VERSION")
+export IMGTAG=$(echo "$1a$ALPINE_VERSION-p$POSTFIX_VERSION-d$DOVECOT_VERSION")
 export IMAGE_EXISTS=$(docker pull "$IMGTAG" 2>/dev/null >/dev/null; echo $?)
 
 # return latest, if container is already available :)
