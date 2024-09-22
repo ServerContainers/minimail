@@ -88,6 +88,18 @@ EOF
     postconf -e "smtpd_recipient_restrictions = permit_mynetworks permit_sasl_authenticated permit_tls_all_clientcerts reject_unauth_destination"
   fi
 
+  if [ -f /etc/postfix/tls/dh4096.pem ]; then
+    echo ">> using dh4096.pem provided in volume"
+  else
+    cp /etc/postfix/dh4096.pem /etc/postfix/tls/dh4096.pem
+  fi
+
+  if [ -f /etc/postfix/tls/dh2048.pem ]; then
+    echo ">> using dh2048.pem provided in volume"
+  else
+    cp /etc/postfix/dh2048.pem /etc/postfix/tls/dh2048.pem
+  fi  
+
   if [ -f /etc/postfix/tls/dh1024.pem ]; then
     echo ">> using dh1024.pem provided in volume"
   else
