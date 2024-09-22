@@ -46,6 +46,9 @@ To build a `latest` tag run `./build.sh release`
 
 ## Changelogs
 
+* 2024-09-22
+    * updated settings
+    * updated tls settings
 * 2023-03-20
     * github action to build container
     * implemented ghcr.io as new registry
