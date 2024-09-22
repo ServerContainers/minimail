@@ -49,6 +49,7 @@ To build a `latest` tag run `./build.sh release`
 * 2024-09-22
     * updated settings
     * updated tls settings
+    * added pre generated `dh4096.pem` dh parameter file to speed up build time
 * 2023-03-20
     * github action to build container
     * implemented ghcr.io as new registry
@@ -143,8 +144,7 @@ __OFFICIAL MAIL ENVIRONMENT VARIABLES__
 
 - /etc/postfix/tls
     - this is where the container looks for:
-        - dh1024.pem (to overwrite the one generated at container build)
-        - dh512.pem (to overwrite the one generated at container build)
+        - dh4096.pem (to overwrite the one generated at container build)
         - rootCA.crt (to check valid client certificates against)
         - client.crt (outgoing SSL Client cert)
         - client.key (outgoing SSL Client key)

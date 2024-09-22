@@ -12,11 +12,6 @@ RUN apk add --no-cache \
   \
  && mkdir /etc/postfix/tls /var/vmail /container \
   \
- && openssl dhparam -out /etc/postfix/dh4096.pem 4096 \
- && openssl dhparam -out /etc/postfix/dh2048.pem 2048 \
- && openssl dhparam -out /etc/postfix/dh1024.pem 1024 \
- && openssl dhparam -out /etc/postfix/dh512.pem 512 \
-  \
  && addgroup --gid 5000 dockervmail \
  && adduser --ingroup dockervmail --uid 5000 --home /var/vmail --shell /bin/false --disabled-password --gecos "" dockervmail
 

@@ -91,23 +91,5 @@ EOF
   if [ -f /etc/postfix/tls/dh4096.pem ]; then
     echo ">> using dh4096.pem provided in volume"
   else
-    cp /etc/postfix/dh4096.pem /etc/postfix/tls/dh4096.pem
-  fi
-
-  if [ -f /etc/postfix/tls/dh2048.pem ]; then
-    echo ">> using dh2048.pem provided in volume"
-  else
-    cp /etc/postfix/dh2048.pem /etc/postfix/tls/dh2048.pem
-  fi  
-
-  if [ -f /etc/postfix/tls/dh1024.pem ]; then
-    echo ">> using dh1024.pem provided in volume"
-  else
-    cp /etc/postfix/dh1024.pem /etc/postfix/tls/dh1024.pem
-  fi
-
-  if [ -f /etc/postfix/tls/dh512.pem ]; then
-    echo ">> using dh512.pem provided in volume"
-  else
-    cp /etc/postfix/dh512.pem /etc/postfix/tls/dh512.pem
+    cp /container/config/dh-params/dh4096.pem /etc/postfix/tls/dh4096.pem
   fi
