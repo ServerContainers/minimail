@@ -1,2 +1,3 @@
 #!/bin/sh
+rm /run/dovecot/master.pid
 exec /usr/sbin/dovecot -F

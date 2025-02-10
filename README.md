@@ -46,6 +46,8 @@ To build a `latest` tag run `./build.sh release`
 
 ## Changelogs
 
+* 2025-02-10
+    * fixed dovecot restart bug #3 
 * 2024-09-22
     * updated settings
     * updated tls settings
