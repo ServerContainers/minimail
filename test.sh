@@ -40,9 +40,11 @@ docker build -t "$IMAGE" .
 
 echo ">> (re)starting container $NAME"
 docker rm -f "$NAME" >/dev/null 2>&1 || true
+# NOTE: the account domain (example.com) must differ from MAIL_FQDN's host,
+# otherwise postfix treats it as a local ($mydestination) domain and mail bounces.
 docker run -d --name "$NAME" \
-  -e MAIL_FQDN=mailbox.example.com \
-  -e ACONF_USER_ACCOUNT_NAME_tester='tester@mailbox.example.com' \
+  -e MAIL_FQDN=mail.example.com \
+  -e ACONF_USER_ACCOUNT_NAME_tester='tester@example.com' \
   -e ACONF_USER_PASSWORD_HASH_tester='{PLAIN}secret' \
   "$IMAGE"
 
@@ -121,6 +123,33 @@ if docker ps --format '{{.Names}}' | grep -q "^${NAME}$"; then
     echo "ok - IMAP greeting: $IMAP_GREETING"
   else
     fail "IMAP did not return a '* OK' greeting (got: '$IMAP_GREETING')"
+  fi
+
+  echo ">> assert: user can actually authenticate (passdb passwd-file)"
+  if docker exec "$NAME" doveadm auth test tester@example.com secret 2>&1 | grep -q 'auth succeeded'; then
+    echo "ok - user login works"
+  else
+    fail "doveadm auth test failed for tester@example.com"
+  fi
+
+  echo ">> assert: mail actually gets delivered (smtp -> dovecot lmtp -> maildir)"
+  MB=tester@example.com
+  BEFORE=$(docker exec "$NAME" doveadm mailbox status -u "$MB" messages INBOX 2>/dev/null | grep -oE 'messages=[0-9]+' | cut -d= -f2 || true)
+  BEFORE=${BEFORE:-0}
+  docker exec "$NAME" sh -c "printf 'Subject: testsuite\r\nFrom: s@ext.test\r\nTo: $MB\r\n\r\ndelivery check\r\n' | sendmail -f s@ext.test $MB"
+  DELIVERED=0
+  d=0
+  while [ "$d" -lt 15 ]; do
+    AFTER=$(docker exec "$NAME" doveadm mailbox status -u "$MB" messages INBOX 2>/dev/null | grep -oE 'messages=[0-9]+' | cut -d= -f2 || true)
+    AFTER=${AFTER:-0}
+    if [ "$AFTER" -gt "$BEFORE" ]; then DELIVERED=1; break; fi
+    d=$((d + 1))
+    sleep 1
+  done
+  if [ "$DELIVERED" -eq 1 ]; then
+    echo "ok - mail delivered (INBOX $BEFORE -> $AFTER)"
+  else
+    fail "mail was not delivered to INBOX"
   fi
 
 fi
