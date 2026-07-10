@@ -40,11 +40,12 @@ docker build -t "$IMAGE" .
 
 echo ">> (re)starting container $NAME"
 docker rm -f "$NAME" >/dev/null 2>&1 || true
-# NOTE: the account domain (example.com) must differ from MAIL_FQDN's host,
-# otherwise postfix treats it as a local ($mydestination) domain and mail bounces.
+# the account domain deliberately EQUALS MAIL_FQDN's host: this guards the
+# 'mydestination =' config. with it, delivery stays virtual (works); without it
+# postfix would treat the domain as local and bounce mail as "unknown user".
 docker run -d --name "$NAME" \
   -e MAIL_FQDN=mail.example.com \
-  -e ACONF_USER_ACCOUNT_NAME_tester='tester@example.com' \
+  -e ACONF_USER_ACCOUNT_NAME_tester='tester@mail.example.com' \
   -e ACONF_USER_PASSWORD_HASH_tester='{PLAIN}secret' \
   "$IMAGE"
 
@@ -126,14 +127,14 @@ if docker ps --format '{{.Names}}' | grep -q "^${NAME}$"; then
   fi
 
   echo ">> assert: user can actually authenticate (passdb passwd-file)"
-  if docker exec "$NAME" doveadm auth test tester@example.com secret 2>&1 | grep -q 'auth succeeded'; then
+  if docker exec "$NAME" doveadm auth test tester@mail.example.com secret 2>&1 | grep -q 'auth succeeded'; then
     echo "ok - user login works"
   else
-    fail "doveadm auth test failed for tester@example.com"
+    fail "doveadm auth test failed for tester@mail.example.com"
   fi
 
   echo ">> assert: mail actually gets delivered (smtp -> dovecot lmtp -> maildir)"
-  MB=tester@example.com
+  MB=tester@mail.example.com
   BEFORE=$(docker exec "$NAME" doveadm mailbox status -u "$MB" messages INBOX 2>/dev/null | grep -oE 'messages=[0-9]+' | cut -d= -f2 || true)
   BEFORE=${BEFORE:-0}
   docker exec "$NAME" sh -c "printf 'Subject: testsuite\r\nFrom: s@ext.test\r\nTo: $MB\r\n\r\ndelivery check\r\n' | sendmail -f s@ext.test $MB"
@@ -150,6 +151,14 @@ if docker ps --format '{{.Names}}' | grep -q "^${NAME}$"; then
     echo "ok - mail delivered (INBOX $BEFORE -> $AFTER)"
   else
     fail "mail was not delivered to INBOX"
+  fi
+
+  echo ">> assert: unknown recipient is rejected (no local catch-all)"
+  RCPT_REPLY=$({ sleep 2; printf 'EHLO test\r\n'; sleep 1; printf 'MAIL FROM:<s@ext.test>\r\n'; sleep 2; printf 'RCPT TO:<ghost@mail.example.com>\r\n'; sleep 2; printf 'QUIT\r\n'; sleep 1; } | docker exec -i "$NAME" nc -w 10 127.0.0.1 25 2>/dev/null | tr -d '\r')
+  if echo "$RCPT_REPLY" | grep -qi '550.*[Uu]ser unknown'; then
+    echo "ok - unknown recipient rejected (550 User unknown)"
+  else
+    fail "unknown recipient not rejected as expected; got: $(echo "$RCPT_REPLY" | grep '^5' | tail -1)"
   fi
 
 fi
